@@ -19,7 +19,7 @@ app.set(express.static('public'))
 const mongoose=require('mongoose')
 const url = 'mongodb://127.0.0.1:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
 
-mongoose.connect(process.env.DB_URI,{
+mongoose.connect('mongodb://127.0.0.1:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false',{
     useNewUrlParser: true
 })
 const db = mongoose.connection
