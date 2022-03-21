@@ -17,7 +17,9 @@ app.set(express.static('public'))
 
 //mongoose
 const mongoose=require('mongoose')
-mongoose.connect(process.env.DB_URI,{
+const url = process.env.DB_URI
+
+mongoose.connect(url,{
     useNewUrlParser: true
 })
 const db = mongoose.connection
