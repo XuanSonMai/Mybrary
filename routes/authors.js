@@ -7,16 +7,17 @@ const Author = require('../models/author')
 router.get('/',async(req,res)=>
 {
     const searchOptions = {}
-    
-    if(req.query.name !=null && req.query.name !=='')
+    Author.deleteMany({})
+    console.log(req.options)
+    // if(req.options.name !=null && req.options.name !=='')
       
-    {
-        //searchOptions.name = new ReqExp(req.query.name, 'i')
-    }
+    // {
+    //     searchOptions.name = req.options.name
+    // }
     try {
         const authors= await Author.find(searchOptions)
         res.render('authors/index',{authors,
-        searchOptions: req.query})
+        searchOptions: req.query,msg:'authors'})
        
     } catch (error) {
         res.redirect('/')
@@ -35,17 +36,24 @@ router.get('/new',(req,res)=>
 
 
 //create author route
-router.post('/',(req,res)=>
+router.post('/',(req,res,next)=>
 {
     
     const author = new Author({
         name:req.body.name
     })
+
+    //console.log(author)
     author.save((err,newAuthor)=>
     {
         if(err)
         {
 
+        }
+        else
+        {
+            req.options= req.body.name
+            res.redirect('/authors')
         }
     })
     

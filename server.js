@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/authors')
+const bookRouter = require('./routes/book')
 
 
 //set views and layouts
@@ -15,7 +16,7 @@ const pathViews = path.join(__dirname,'views')
 app.set('views', pathViews )
 app.set('layout',path.join(pathViews,'layouts/layout' ))
 app.use(expressLayouts)
-app.set(express.static('public'))
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({limit:'10mb',extended:false}))
 
 
@@ -32,6 +33,7 @@ db.once('open',() => console.log('Connect Success'))
 
 app.use('/',indexRouter)
 app.use('/authors',authorRouter)
+app.use('/books',bookRouter)
 
 
 app.listen(process.env.PORT || 3000)
