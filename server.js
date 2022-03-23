@@ -4,10 +4,11 @@ const expressLayouts = require('express-ejs-layouts')
 const path=require('path')
 const bodyParser = require ('body-parser')
 require('dotenv').config();
-
+const methodOverride = require('method-override')
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/authors')
 const bookRouter = require('./routes/book')
+
 
 
 //set views and layouts
@@ -16,12 +17,14 @@ const pathViews = path.join(__dirname,'views')
 app.set('views', pathViews )
 app.set('layout',path.join(pathViews,'layouts/layout' ))
 app.use(expressLayouts)
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({limit:'10mb',extended:false}))
 
 
 //mongoose
 const mongoose=require('mongoose')
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false',{
     useNewUrlParser: true
@@ -36,4 +39,4 @@ app.use('/authors',authorRouter)
 app.use('/books',bookRouter)
 
 
-app.listen(process.env.PORT || 3000)
+app.listen( 2000)

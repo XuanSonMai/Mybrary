@@ -1,46 +1,44 @@
-const express = require('express')
+const express = require('express');
+const author = require('../models/author');
 const router = express.Router()
 const Author = require('../models/author')
-
+const imageArrays = ['']
 
 //all authors route
+let dem = 0;
+
+// get all
 router.get('/',async(req,res)=>
 {
+    
     const searchOptions = {}
-    Author.deleteMany({})
-    console.log(req.options)
-    // if(req.options.name !=null && req.options.name !=='')
-      
-    // {
-    //     searchOptions.name = req.options.name
-    // }
+
     try {
         const authors= await Author.find(searchOptions)
+        
+        
+        
         res.render('authors/index',{authors,
-        searchOptions: req.query,msg:'authors'})
+        searchOptions: req.query,
+        msg:'authors', imageSrc :'',}
+       
+        )
        
     } catch (error) {
-        res.redirect('/')
+        res.status(404).json('error')
     }
     
 })
 
 
 
-// new author route
-router.get('/new',(req,res)=>
+router.post('/',(req,res)=>
 {
     
-    res.render('authors/new',{author: new Author()})
-})
 
-
-//create author route
-router.post('/',(req,res,next)=>
-{
-    
     const author = new Author({
-        name:req.body.name
+        name:req.body.name,
+        imageName:req.body.imageName
     })
 
     //console.log(author)
@@ -57,6 +55,50 @@ router.post('/',(req,res,next)=>
         }
     })
     
+})
+
+
+
+// new author route
+router.get('/new',(req,res)=>
+{
+    
+    res.render('authors/new',{author: new Author(),
+    msg:'authors'})
+})
+
+
+//create author route
+
+
+router.get('/:id',async(req,res)=>
+{
+
+    
+    console.log('get by id')
+   let author = await Author.find({_id:req.params.id})
+   console.log(author)
+   res.json({author})
+   
+})
+
+router.get('/:id/edit',(req,res)=>
+{
+   console.log('edit')
+    res.send('Edit author '+ req.params.id)
+})
+
+router.put('/:id/update',(req,res)=>
+{
+    console.log('update')
+    res.send('Update author '+ req.params.id)
+})
+
+router.get('/:id/delete',async (req,res)=>
+{
+
+   await Author.deleteOne({_id:req.params.id})
+   res.redirect('/authors')
 })
 
 module.exports = router

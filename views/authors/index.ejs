@@ -1,10 +1,33 @@
-<h2>Search Authors</h2>
+<h2>Search Girl</h2>
 <form action="/authors" method="POST">
     <label for="">Name</label>
     <input type="text" name="name" value="<%= searchOptions.name%>">
     <button type="submit">Enter</button>
+
+    <label for="">ImageName</label>
+    <input type="text" name="imageName" value="<%= searchOptions.name%>">
+    <button type="submit">Enter</button>
+   
+</form>
+<form action="/authors/:name/get" method="GET">
+    
+    <label for="">Name </label>
+    <input type="text" name="search" value="">
+    <button type="submit">Search</button>
 </form>
 <br>
-<% authors.forEach(author=>{ %>
-   <div> <%= author.name%></div>
+<div class ="container">
+<% let length=authors.length;let dem=0;authors.forEach(author=>{ %>
+    <div class="header-handle">
+
+            <div class="header-title"> <%= author.name%></div>   
+            <div>
+            <a href="/authors/<%=author.id%>">Pick </a>
+            <a href="/authors/<%=author.id%>/delete">Delete </a>
+            </div>        
+            
+            <img class="img-handle" src="/pictures/<%=author.imageName%>.jfif" alt="">
+    </div>
+   
    <%})%>
+</div>

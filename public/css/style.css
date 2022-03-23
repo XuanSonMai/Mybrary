@@ -1,0 +1,32 @@
+.header-handle{
+    color:red;
+    font-size: 20px;
+    text-align: center;
+    
+    margin-left:15px ;
+
+   
+    
+}
+a{
+    text-decoration: none;
+   
+}
+.header-title
+{
+    text-transform: uppercase;
+}
+.container
+{
+    
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+
+}
+.img-handle
+{
+    width: 200px;
+    height: 200px;
+    margin-top: 15px;
+}

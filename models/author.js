@@ -4,6 +4,11 @@ const authorSchema = new mongoose.Schema ({
     name:{
         type:String,
         require:true
+    },
+    imageName:
+    {
+        type:String,
+        require:true
     }
 })
 
