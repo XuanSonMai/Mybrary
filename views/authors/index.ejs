@@ -17,17 +17,21 @@
 </form>
 <br>
 <div class ="container">
-<% let length=authors.length;let dem=0;authors.forEach(author=>{ %>
+<!-- <% let length=authors.length;let dem=0;authors.forEach(author=>{ %> -->
     <div class="header-handle">
 
-            <div class="header-title"> <%= author.name%></div>   
+            <div class="header-title"> <%=author.name%></div>   
             <div>
             <a href="/authors/<%=author.id%>">Pick </a>
-            <a href="/authors/<%=author.id%>/delete">Delete </a>
-            </div>        
+           
             
+            <%let url = {url:`/authors/${author.id}`}%>
+            <%- include('../partials/deleteForm',url)%>
+            <a href="/authors/<%=author.id%>/edit">Edit </a>
+            <a href="/authors/<%=author.id%>">Views </a>
+            </div>                    
             <img class="img-handle" src="/pictures/<%=author.imageName%>.jfif" alt="">
     </div>
    
-   <%})%>
+   <!-- <%})%> -->
 </div>

@@ -2,10 +2,11 @@ const express = require('express');
 const author = require('../models/author');
 const router = express.Router()
 const Author = require('../models/author')
+const Book = require('../models/book')
 const imageArrays = ['']
 
 //all authors route
-let dem = 0;
+
 
 // get all
 router.get('/',async(req,res)=>
@@ -51,54 +52,104 @@ router.post('/',(req,res)=>
         else
         {
             req.options= req.body.name
-            res.redirect('/authors')
+            res.redirect('/authors/new')
         }
     })
     
 })
 
-
-
 // new author route
 router.get('/new',(req,res)=>
 {
-    
+    console.log('new')
     res.render('authors/new',{author: new Author(),
     msg:'authors'})
 })
+router.get('/:id',async(req,res)=>
+{
+  
+   try {
+       const author =await Author.findById(req.params.id)
+       
+       const books = await Book.find({author:author.id}).limit(1).exec()
+       console.log(books)
+       res.render('authors/show',{
+           author,
+           booksByAuthor: books,
+           msg:'Books'
+       })
+   } catch (error) {
+       res.send('Error')
+   }
+
+   
+})
+
 
 
 //create author route
 
 
-router.get('/:id',async(req,res)=>
+
+
+router.get('/:id/edit',async(req,res)=>
 {
 
-    
-    console.log('get by id')
-   let author = await Author.find({_id:req.params.id})
-   console.log(author)
-   res.json({author})
+    try {
+        const author = await Author.findById(req.params.id)
+        res.render('authors/edit',{author,msg:'authors'})
+    } catch (error) {
+       
+        res.redirect('')
+    }
+})
+
+router.put('/:id',async(req,res)=>
+{
+
+    console.log(locals)
+    let author
+    try {
+        author = await Author.findById(req.params.id)
+        author.name = req.body.name
+        console.log(typeof req.body.name)
+        console.log(req.body.name)
+         await author.save()
+         res.redirect(`${req.params.id}`)
+    } catch (error) {
+        if(author == null)
+        {
+          
+            res.redirect('/authors')
+        }
+        res.render('authors/edit',{
+            author,
+            errorMessage: ' Error creating Author'
+        })
+    }
+})
+
+router.delete('/:id',async (req,res)=>
+{
+    let author
+    try {
+         author=await  Author.findById({_id:req.params.id})
+         await author.remove()
+         console.log(author)
+        res.redirect('/authors')
+    } catch (error) {
+      if(author==null)
+      {
+          res.redirect('/')
+      } 
+      else
+      {
+          res.redirect(`${author.id}`)
+      }
+    }
+ 
    
-})
-
-router.get('/:id/edit',(req,res)=>
-{
-   console.log('edit')
-    res.send('Edit author '+ req.params.id)
-})
-
-router.put('/:id/update',(req,res)=>
-{
-    console.log('update')
-    res.send('Update author '+ req.params.id)
-})
-
-router.get('/:id/delete',async (req,res)=>
-{
-
-   await Author.deleteOne({_id:req.params.id})
-   res.redirect('/authors')
+ 
 })
 
 module.exports = router

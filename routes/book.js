@@ -19,11 +19,11 @@ const fs = require('fs')
 // })
 
 
-//all authors routes
+//all book routes
 router.get('/',async(req,res)=>
 {
     var query = Book.find()
-
+    
     if(req.query.title !=null && req.query.title != '')
     {
          query = query.regex('title', new RegExp(req.query.title,'i'))

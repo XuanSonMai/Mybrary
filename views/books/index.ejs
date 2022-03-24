@@ -20,9 +20,11 @@
 
 <div>
 
-    <%books.forEach(book =>{%>
-    <img height="150" width="100" src="<%=book.coverImagePath%>">
-    <%})%>
+    <% books.forEach(book => { %>
+        <%for(let i =0;i<book.pageCount;i++){%>
+           
+        <img height="150" width="100" src="<%= book.coverImagePath %>">
+      <% }}) %>
    
 </div>
 <br>
