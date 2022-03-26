@@ -1,3 +1,14 @@
 <form  method="POST" action="<%=url%>?_method=DELETE">
-    <button type="submit">delete</button>
+    <%if(!url.startsWith('/authors')){%>
+        
+
+        <input type="hidden" name="count" value="<%= --book.pageCount%>">
+        <button class="btn" type="submit">Delete </button>
+       
+           
+   <%}%>
+   <%if(url.startsWith('/authors')){%>
+   <button class="btn btn-danger" type="submit">Delete </button>
+   <%}%>
+ 
 </form>

@@ -5,37 +5,43 @@ const path = require('path')
 const bookSchema = new mongoose.Schema ({
     title:{
         type:String,
-        require:true
+        required:true,
+     
     },
     description:
     {
-        type:String
+        type:String,
+        required:true,
     },
     publishDate:
     {
         type:Date,
-        required:true
+        required:true,
+       
     },
     pageCount:
     {
         type:Number,
-        required:true
+        required:true,
+   
     },
     createdAt:
     {
        type:Date,
-       require:true,
+     
     },
     coverImageType:
     {
         type:String,
         required:true,
+    
 
     },
     coverImage:
     {
         type:Buffer,
-        required:true
+        required:true,
+        
     },
     author:{
         type:String,

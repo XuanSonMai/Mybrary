@@ -1,26 +1,29 @@
-<header>
-    <nav>
-        <a href="/authors">
+<header>            
+    <nav class="header-nav">
+        <a class ="header-title" href="/authors">
             MY GIRL
        </a>
+       <%if(msg=='index' ){%>
+        <ul>
+            <li  class="header-link"><a href="/books">Index</a></li>
+            <li class="header-link"> <a href="/books/new">Recently</a></li>
+        </ul>
+        
+       <%}%>   
        <%if(msg == 'books' || msg =='HELLO TEST'){%>
         <ul>
-            <li><a href="/books">All Book</a></li>
-            <li><a href="/books/new">Add Books</a></li>
+            <li  class="header-link"><a href="/books">All Book</a></li>
+            <li class="header-link"> <a href="/books/new">Add Books</a></li>
         </ul>
         
         <%}%>
-        <%if(msg == 'authors' || msg =='HELLO TEST'){%>
-         
-           
+        <%if(msg == 'authors' || msg =='HELLO TEST'){%>                    
              <ul>
-                <li><a href="/authors">All hàng</a></li>
-                <li><a href="/authors/new">Add hàng</a></li>
-                <li><a href="/books">Go to Books</a></li>
-            </ul>
-            
-      <%}%>
-
-      
+                <li class="header-link"> <a href="/authors">All hàng</a></li>
+                <li class="header-link"> <a href="/authors/new">Add hàng</a></li>
+                <li class="header-link"> <a href="/books">Go to Books</a></li>
+            </ul>            
+      <%}%>  
+     
     </nav>
 </header>

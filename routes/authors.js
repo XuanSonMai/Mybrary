@@ -42,7 +42,7 @@ router.post('/',(req,res)=>
         imageName:req.body.imageName
     })
 
-    //console.log(author)
+
     author.save((err,newAuthor)=>
     {
         if(err)
@@ -61,7 +61,7 @@ router.post('/',(req,res)=>
 // new author route
 router.get('/new',(req,res)=>
 {
-    console.log('new')
+
     res.render('authors/new',{author: new Author(),
     msg:'authors'})
 })
@@ -71,8 +71,8 @@ router.get('/:id',async(req,res)=>
    try {
        const author =await Author.findById(req.params.id)
        
-       const books = await Book.find({author:author.id}).limit(1).exec()
-       console.log(books)
+       const books = await Book.find({author:author.id}).exec()
+    
        res.render('authors/show',{
            author,
            booksByAuthor: books,
@@ -107,13 +107,12 @@ router.get('/:id/edit',async(req,res)=>
 router.put('/:id',async(req,res)=>
 {
 
-    console.log(locals)
+   
     let author
     try {
         author = await Author.findById(req.params.id)
         author.name = req.body.name
-        console.log(typeof req.body.name)
-        console.log(req.body.name)
+     
          await author.save()
          res.redirect(`${req.params.id}`)
     } catch (error) {
@@ -131,11 +130,11 @@ router.put('/:id',async(req,res)=>
 
 router.delete('/:id',async (req,res)=>
 {
+
     let author
     try {
-         author=await  Author.findById({_id:req.params.id})
-         await author.remove()
-         console.log(author)
+        await Author.deleteOne({_id:req.params.id})
+        
         res.redirect('/authors')
     } catch (error) {
       if(author==null)
