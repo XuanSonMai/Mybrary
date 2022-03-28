@@ -12,6 +12,7 @@
     text-decoration: none;
     font-size: var(--nav-title-font-size);
     font-weight: var(--nav-title-font-weight);
+    font-size: 2rem;
 }
 
 .header-nav
@@ -22,6 +23,10 @@
     align-items: center;
     margin-bottom: 5rem;
 
+}
+.items-container
+{
+    margin-bottom: 3rem;
 }
 
 .header-nav ul
@@ -53,5 +58,6 @@
 {
     font-size: 2rem;
     font-weight: 500;
+    margin-left: 2rem;
 }
 

@@ -1,13 +1,8 @@
-
-<div class="page-header"><h2>New Books</h2>
-
-
-<form action="/books" method="POST" >
-     
-    <%-include('_form_fields')%>
-  
-   
-      
-    <a href="/books">Cancel</a>
-    <button type="submit">Creat</button>
+<h2 class="page-header">New Books</h2>
+<form action="/books" method="POST" >     
+    <%-include('_form_fields')%>     
+    <div class="form-row form-row-end btn-row ">
+        <a class = "btn btn-danger" href="/books">Cancel</a>
+        <button class ="btn btn-primary" type="submit">Creat</button>
+    </div>     
 </form>

@@ -1,6 +1,10 @@
 @import '/css/variable.css';
 @import '/css/header.css';
 @import '/css/button.css';
+@import '/css/form.css';
+@import '/css/author.css';
+@import '/css/books.css';
+
 
 
 :root
@@ -20,9 +24,32 @@ body
     max-width: 1200px;
     max-width: auto;
     margin-bottom: 3rem;
+    margin-left: 3rem;
 }
 
 .inner-container
 {
     margin: 0 2rem;
+}
+
+.img-content > *:last-child
+{
+    margin-left: 0rem;
+}
+
+.img-content
+{
+    margin-left: 2rem;
+    display: flex;
+    align-items: baseline;
+   
+    flex-direction: column;
+}
+.img-content-parent
+{display: flex;}
+
+.error-message
+{
+    color:hsl(var(--color-danger-hue),100%,50%);
+    margin-left: 2rem;
 }

@@ -4,12 +4,12 @@ const Book = require('./book')
 const authorSchema = new mongoose.Schema ({
     name:{
         type:String,
-        require:true
+        required:true
     },
     imageName:
     {
         type:String,
-        require:true
+        required:true
     }
 })
 

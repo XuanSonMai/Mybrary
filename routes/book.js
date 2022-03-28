@@ -111,7 +111,11 @@ router.get('/:id',async (req,res)=>
     try {
         
         let book = await Book.findById({_id:req.params.id}).populate('author').exec()
-        console.log(book.id)
+        if(book.author==null)
+        {
+                
+         }
+        
         if(!book.coverImage)
         {
             await Book.deleteOne({_id:book.id})
@@ -216,9 +220,9 @@ router.post('/',async(req,res)=>
         )
      
         saveCover(book,req.body.cover)
-       await book.save()
-        console.log('succes')
-        res.redirect('books')
+         newBook= await book.save()
+      
+        res.redirect(`books/${newBook.id}`)
     } catch (error) {
       
        if(!book)

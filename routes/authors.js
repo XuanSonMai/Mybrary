@@ -12,13 +12,13 @@ const imageArrays = ['']
 router.get('/',async(req,res)=>
 {
     
-    const searchOptions = {}
+    let searchOptions = {}
+    
+    searchOptions = req.query
 
     try {
-        const authors= await Author.find(searchOptions)
-        
-        
-        
+        const authors= await Author.find(searchOptions)    
+                           
         res.render('authors/index',{authors,
         searchOptions: req.query,
         msg:'authors', imageSrc :'',}
@@ -33,28 +33,27 @@ router.get('/',async(req,res)=>
 
 
 
-router.post('/',(req,res)=>
+router.post('/',async (req,res)=>
 {
     
-
     const author = new Author({
         name:req.body.name,
         imageName:req.body.imageName
     })
 
+    try {
+        const newAuthor = await author.save()
+        res.redirect(`authors/${newAuthor.id}`)
+      } catch {
+          console.log('Error creating Author')
+        res.render('authors/new', {
+          author: author,
+          errorMessage: 'Error creating Author',
+          msg:'authors'
+        })
+      }
 
-    author.save((err,newAuthor)=>
-    {
-        if(err)
-        {
 
-        }
-        else
-        {
-            req.options= req.body.name
-            res.redirect('/authors/new')
-        }
-    })
     
 })
 
@@ -112,25 +111,27 @@ router.put('/:id',async(req,res)=>
     try {
         author = await Author.findById(req.params.id)
         author.name = req.body.name
+        author.imageName = req.body.imageName
+        await author.save()
      
-         await author.save()
-         res.redirect(`${req.params.id}`)
+        res.redirect(`/authors/${author.id}`)
     } catch (error) {
+       
         if(author == null)
-        {
-          
-            res.redirect('/authors')
+        {     
+            res.render('authors/edit',{
+                author,
+                errorMessage: ' Error creating Author',
+                msg:'authors'
+            })
         }
-        res.render('authors/edit',{
-            author,
-            errorMessage: ' Error creating Author'
-        })
+       
     }
 })
 
 router.delete('/:id',async (req,res)=>
 {
-
+ 
     let author
     try {
         await Author.deleteOne({_id:req.params.id})

@@ -1,39 +1,36 @@
-<h2>Search Girl</h2>
-<form action="/authors" method="POST">
-    <label for="">Name</label>
-    <input type="text" name="name" value="<%= searchOptions.name%>">
-    <button type="submit">Enter</button>
+<h2 class="page-header">Search Girl</h2>
 
-    <label for="">ImageName</label>
-    <input type="text" name="imageName" value="<%= searchOptions.name%>">
-    <button type="submit">Enter</button>
-   
-</form>
-<form action="/authors/:name/get" method="GET">
+<form action="/authors" method="GET">
+    <div class="form-row">
+
+        <div class="form-item">
+            <label for="">Name </label>
+            <input type="text" name="name" value="<%= searchOptions.name%>"> 
+           
+        </div>
+       
+    </div>
+
+    <div class="form-row form-row-end">
+        <button class= "btn btn-primary" type="submit">Search</button>
+    </div>
     
-    <label for="">Name </label>
-    <input type="text" name="search" value="">
-    <button type="submit">Search</button>
 </form>
 <br>
-<div class ="container">
-<!-- <% let length=authors.length;let dem=0;authors.forEach(author=>{ %> -->
-    
 
-            <div class="header-title"> <%=author.name%></div>   
-            <div class = "btn-row">
-            
-                    <a class="btn btn-primary" href="/authors/<%=author.id%>">Pick </a>
-                    <a class="btn btn-primary"  href="/authors/<%=author.id%>/edit">Edit </a>
-                    <a class="btn btn-primary" href="/authors/<%=author.id%>">Views </a> 
-                </div> 
-                  
-            <%let url = {url:`/authors/${author.id}`}%>
-            <%- include('../partials/deleteForm',url)%>
-            
-                             
-            <img class="img-handle" src="/pictures/<%=author.imageName%>.jfif" alt="">
-       
-   
-   <!-- <%})%> -->
-</div>
+<% let length=authors.length;let dem=0;authors.forEach(author=>{ %>
+    
+    <div class="author-name">
+        <div class="author-name"> <%=author.name%></div>   
+        <img class="img-handle" src="/pictures/<%=author.imageName%>.jfif" alt="">
+    </div>
+    <div class ="author-row">     
+        <!-- <%let url = {url:`/authors/${author.id}`}%> -->      
+        <div class = "btn-row">        
+            <a class="btn btn-primary" href="/authors/<%=author.id%>">Pick </a>
+            <a class="btn btn-primary"  href="/authors/<%=author.id%>/edit">Edit </a>
+            <a class="btn btn-primary" href="/authors/<%=author.id%>">Views </a> 
+        </div> 
+        <%- include('../partials/deleteForm',url)%>
+    </div>
+   <%})%>

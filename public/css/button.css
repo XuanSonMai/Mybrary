@@ -20,6 +20,7 @@
     cursor: pointer;
     text-decoration: none;
     text-align: center;
+    margin: 1rem ;
 
 }
 
@@ -39,7 +40,7 @@
 {
     color:var(--color-btn-danger-text);
     background-color: var(--color-btn-danger-background);
-    margin: 1rem ;
+   
 }
 
 .btn-danger:hover
@@ -47,13 +48,31 @@
     color:var(--color-btn-danger-text-dark);
     background-color: var(--color-btn-danger-background-dark);
 }
+
+.header-container{
+    margin-left: 1rem;
+}
 .btn-row > * {
     margin-left: 1rem;
     text-decoration: none;
+    
 
 }
 .btn-row > *:first-child {
-  
+  margin-left:0 ;
    
+}
+.btn-row
+{
+    display: flex;
+    margin-left: 1rem;
+    align-items: center;
+}
+
+.container-book-view
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 

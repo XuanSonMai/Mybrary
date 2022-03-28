@@ -1,0 +1,35 @@
+<% bookCoverClass= locals.large ?'book-cover-large' : '' %>
+<% bookGridClass= locals.large ?'book-grid-large' : '' %>
+
+<%if(locals.flag){%>
+   
+    <div class="book-grid <%= bookGridClass%>"> 
+        <% books.forEach(book => { %>
+    
+            <div class="container-book-view">
+                 <img class="book-cover <%= bookCoverClass %>"
+                    src="<%= book.coverImagePath %>">  
+                    
+                    <a class="btn btn-primary" href="/books/<%= book.id%>">  Views                            
+                    </a> 
+              
+               
+            </div>     
+        <%})%>    
+    </div>       
+     
+<%}%>
+
+<%if(!locals.flag){%>
+<div class="book-grid <%= bookGridClass%>"> 
+    <% books.forEach(book => { %>
+
+        <%for(let i =0;i<book.pageCount;i++){%>                 
+                <a href="/books/<%= book.id%>">       
+                <img class="book-cover <%= bookCoverClass %>"
+                src="<%= book.coverImagePath %>">
+             </a>     
+        <% }}) %>  
+</div>
+<%}%>
+

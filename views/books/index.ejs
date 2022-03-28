@@ -1,30 +1,39 @@
 <h2 class="page-header">Search Books</h2>
-<form action="/books" method="GET">
-    <div>
-        <label for="">Title</label>
-        <input type="text" name="title" value="<%=searchOptions%>">
-    </div>
 
-    <div>
-        <label for="">Publish After</label>
-        <input type="date" name="publishedAfter" value="<%=searchOptions%>">
-    </div>
-
-    <div>
-        <label for="">Publish Before</label>
-        <input type="date" name="publishedBefore" value="<%=searchOptions%>">
-    </div>
-    
-    <button type="submit">Search</button>
-</form>
-
-<div>
-
-      <% books.forEach(book => { %>
+    <form action="/books" method="GET">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="">Title</label>
+                <input type="text" name="title" value="<%=searchOptions%>">
+            </div>
+            
+        </div>
+       <div class="form-row">
+            <div class="form-item"> 
+                    <label for="">Publish After</label>
+                    <input type="date" name="publishedAfter" value="<%=searchOptions%>">
+            </div>
       
-        <a href="/books/<%=book.id%>">Views ??</a>
-        <img height="150" width="100" src="<%= book.coverImagePath %>">
-      <% }) %>
+       
+    
+        <div class="form-item" > 
+            <label for="">Publish Before</label>
+            <input type="date" name="publishedBefore" value="<%=searchOptions%>">
+        </div>
+    </div>
+      
+    <div class="form-row form-row-end">
+        <button class= "btn btn-primary" type="submit">Search</button>
+    </div>
+       
+    </form>
+
+
+
+
+    <% let flag='bookIndex'%>
+    <%- include('../partials/bookGrid',{flag,books,large:true})%>
+  
    
-</div>
+
 <br>
